@@ -1,0 +1,31 @@
+{
+  "name": "mail-sink",
+  "version": "0.0.1",
+  "description": "SMTP server for testing.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nick-Triller/mail-sink"
+  },
+  "keywords": [
+    "smtp",
+    "testing",
+    "email",
+    "mail",
+    "server"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "commander": "2.9.0",
+    "mailparser": "^0.6.1",
+    "smtp-protocol": "2.4.7"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.2"
+  },
+  "bin": "./index.js",
+  "author": "Nick Triller"
+}
