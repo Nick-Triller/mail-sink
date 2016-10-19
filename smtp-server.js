@@ -1,7 +1,4 @@
 var smtp = require("smtp-protocol");
-var fs = require("fs");
-var quotedPrintable = require("quoted-printable");
-var utf8 = require("utf8");
 var MailParser = require("mailparser").MailParser;
 
 var mails = [];
@@ -25,6 +22,8 @@ mailParser.on("end", function(parsed){
 function start() {
     smtp.createServer(function (req) {
         req.on("from", function (from, ack) {
+            console.log("FROM: " + from);
+            console.log(config.whitelist);
             if(config.whitelist.length == 0 || config.whitelist.indexOf(from) !== -1)
                 ack.accept()
             else ack.reject()
