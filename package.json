@@ -1,6 +1,6 @@
 {
   "name": "mail-sink",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "SMTP server for testing.",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "commander": "2.9.0",
-    "mailparser": "^0.6.1",
+    "mailparser": "0.6.1",
     "smtp-protocol": "2.4.7"
   },
   "devDependencies": {
