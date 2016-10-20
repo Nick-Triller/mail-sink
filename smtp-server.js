@@ -9,7 +9,7 @@ mailParser.on("end", function(parsed){
     // object structure for parsed e-mail
     mails.push(parsed);
     
-    if (!config.quite) {
+    if (!config.quiet) {
         console.log(parsed.html + "\n");
     }
 
