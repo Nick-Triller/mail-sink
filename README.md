@@ -8,8 +8,8 @@ A smtp debugging email sink, inspired by [smtp-sink](https://github.com/jimmystr
 npm install -g mail-sink
 ```
 
-## Docker
-https://hub.docker.com/r/nicktriller/mail-sink/
+## [Docker](https://hub.docker.com/r/nicktriller/mail-sink/)
+The exposed ports are the default ports (8080 for http and 1025 for smtp).
 
 ## Usage
 ```
