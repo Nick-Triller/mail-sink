@@ -28,7 +28,8 @@ var config = {
 	dumpDir: program.dumpDir || "./",
     whitelist: program.whitelist || [],
     quite: program.quite || false,
-    maxEmails: program.max || 200
+    maxEmails: program.max || 200,
+    version: getVersion()
 };
 
 module.exports = {
