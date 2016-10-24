@@ -1,7 +1,7 @@
 var program = require("commander");
 
 program
-  .version("0.0.1")
+  .version(getVersion())
   .option("-s, --smtp-port [number]", "SMTP server port (1025 by default).")
   .option("-p, --http-port [number]", "HTTP server port (8080 by default).")
   .option("-q, --quite", "Do not dump mails to the console (false by default).")
@@ -12,6 +12,13 @@ program
 function collect(val, memory) {
   memory.push(val);
   return memory;
+}
+
+/**
+ * Returns the mail-sink version from package.json
+ */
+function getVersion() {
+    return require("./package.json").version;
 }
 
 var config = {
