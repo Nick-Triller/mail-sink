@@ -42,4 +42,4 @@ module.exports = {
     setConfig: function(configArg) {
         config = configArg;
     }
-}
+};
