@@ -6,6 +6,10 @@ var path = require("path");
 var mails = [];
 var config;
 
+function randomInt (low, high) {
+    return Math.floor(Math.random() * (high - low) + low);
+}
+
 /**
  * Processes a mail
  * @param mail
@@ -15,14 +19,13 @@ function process(parsed) {
     // Log to console if enabled
     if (!config.quite) {
         console.log(parsed.headers);
-        console.log(parsed.html);
+        console.log(parsed.html || parsed.text);
         console.log();
     }
     // Write to file if enabled
     if (config.dump) {
-        var filename =  new Date(parsed.headers["date"]).getTime() +
-            "-" + parsed.headers["message-id"].slice(1, -1) + ".json";
-        console.log(filename);
+        var filename =  new Date().getTime() +
+            "-" + randomInt(10000, 99999) + ".json";
         var savePath = path.join(config.dump, filename);
         var text = JSON.stringify(parsed, null, 2);
         fs.writeFile(savePath, text, function(err) {
