@@ -8,8 +8,10 @@ A smtp debugging email sink, inspired by [smtp-sink](https://github.com/jimmystr
 npm install -g mail-sink
 ```
 
-## [Docker](https://hub.docker.com/r/nicktriller/mail-sink/)
-The exposed ports are the default ports (8080 for http and 1025 for smtp).
+## Features
+- Parsing and rendering mails on a website
+- Dumping mails to file
+- CSS encapsulation
 
 ## Usage
 ```
@@ -26,6 +28,22 @@ The exposed ports are the default ports (8080 for http and 1025 for smtp).
     -m --max [number]         Max number of e-mails to keep (200 by default)
     -d --dump [directory]     Dump mails to files (no dumps by default)
 ```
+
+## Dump to file
+The filenames are constructed as follows: `timestamp-randomInt.json`, e.g. `1477324594663-60741.json`.
+
+## Docker
+mail-sink is avaiable on [Docker Hub](https://hub.docker.com/r/nicktriller/mail-sink/)
+The exposed ports are the default ports (8080 for http and 1025 for smtp).
+`/usr/mails` is a volume (see Dockerfile).
+
+Example: Running the image with mail logging to file:
+```shell
+nick@ubuntu:~/mails$ docker run -it --name mail-sink -p 80:8080 -p 25:1025 c9dd2ce8185e -d ./ -v /usr/src/app ~/mails
+```
+
+## TODO
+- Simulate failure modes
 
 ## License
 MIT License
