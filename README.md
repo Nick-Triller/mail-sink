@@ -21,6 +21,7 @@ npm install -g mail-sink
     -q, --quiet               Do not dump mails to the console (false by default).
     -w, --whitelist [value]   Aceppt mails from these adresses only (no whitelist by default).
     -m --max [number]         Max number of e-mails to keep (200 by default)
+    -d --dump [directory]     Dump mails to files (no dumps by default)
 ```
 
 ## License
