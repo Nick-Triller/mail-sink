@@ -4,7 +4,7 @@ program
   .version(getVersion())
   .option("-s, --smtp-port [number]", "SMTP server port (1025 by default).")
   .option("-p, --http-port [number]", "HTTP server port (8080 by default).")
-  .option("-q, --quite", "Do not dump mails to the console (false by default).")
+  .option("-q, --quiet", "Do not dump mails to the console (false by default).")
   .option("-w, --whitelist [value]", "Aceppt mails from these adresses only (no whitelist by default).", collect, [])
   .option("-m --max [number]", "Max number of e-mails to keep (200 by default)")
   .parse(process.argv);
@@ -27,7 +27,7 @@ var config = {
 	dumpFiles: program.dumpFiles || true,
 	dumpDir: program.dumpDir || "./",
     whitelist: program.whitelist || [],
-    quite: program.quite || false,
+    quite: program.quiet || false,
     maxEmails: program.max || 200,
     version: getVersion()
 };
