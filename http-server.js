@@ -1,35 +1,39 @@
-var http = require("http");
+var app = require("express")();
+var pug = require("pug");
 
 var mails = [];
 var config;
 
-function start() {
-    http.createServer(function (req, res) {
-        switch (req.url) {
-            case "/":
-                res.writeHead(200, {"Content-Type": "text/html"});
-                var page = '<html><meta charset="utf-8"/><head></head><body><h1>Mail Sink</h1><a href="/emails">Emails as json</a><hr>'
-                for (var i=0; i < mails.length; i++) {
-                    page += "<pre>" + JSON.stringify(mails[i].headers, null, 2) + "</pre>"
-                    page += mails[i].html;
-                    page += "<hr>";
-                }
-                page += '</body></html>';
-                res.end(page);
-                break;
-            case "/emails":
-                res.writeHead(200, {"Content-Type": "application/json"});
-                res.end(JSON.stringify(mails));
-                break;
-            default:
-                notFound(res)
-        }
-    }).listen(config.httpPort);
-}
+app.set("views", "./views");
+app.set("view engine", "pug");
 
-function notFound(res) {
-    res.writeHead(404, {"Content-Type": "text/plain"});
-    res.end("Not found");
+app.get('/', function (req, res) {
+    res.type("html");
+    res.render('index', { mails: mails});
+});
+
+app.get("/emails", function (req, res) {
+    res.type("json");
+    res.send(JSON.stringify(mails));
+});
+
+app.get("/emails/:index(\\d+)", function (req, res, next) {
+    res.type("html");
+    var index = +req.params["index"];
+    if (index < 0 || index >= mails.length) {
+        return next();
+    }
+    res.send(mails[index].html);
+});
+
+app.all("*", function (req, res) {
+    res.type("text");
+    res.status(404);
+    res.send("Not found");
+});
+
+function start() {
+    app.listen(config.httpPort);
 }
 
 module.exports = {

@@ -1,0 +1,16 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        script.
+            function resizeIframe(obj) {
+                obj.style.height = obj.contentWindow.document.body.scrollHeight + "px";
+            }
+    body
+        h1 Mail Sink
+        a(href='/emails') Emails as json
+        hr
+        each mail, index in mails
+            iframe(src="/emails/" + index, style="border: 0; padding: 0; margin: 0; width: 100%; height: auto;",
+                onload="resizeIframe(this)")
+            hr
