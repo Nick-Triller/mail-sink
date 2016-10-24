@@ -8,6 +8,9 @@ A smtp debugging email sink, inspired by [smtp-sink](https://github.com/jimmystr
 npm install -g mail-sink
 ```
 
+## Docker
+https://hub.docker.com/r/nicktriller/mail-sink/
+
 ## Usage
 ```
   Usage: index [options]
