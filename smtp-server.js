@@ -6,8 +6,8 @@ var path = require("path");
 var mails = [];
 var config;
 
-function randomInt (low, high) {
-    return Math.floor(Math.random() * (high - low) + low);
+function randomInt(low, high) {
+  return Math.floor(Math.random() * (high - low) + low);
 }
 
 /**
@@ -15,29 +15,29 @@ function randomInt (low, high) {
  * @param mail
  */
 function process(parsed) {
-    mails.push(parsed);
-    // Log to console if enabled
-    if (!config.quite) {
-        console.log(parsed.headers);
-        console.log(parsed.html || parsed.text);
-        console.log();
-    }
-    // Write to file if enabled
-    if (config.dump) {
-        var filename =  new Date().getTime() +
-            "-" + randomInt(10000, 99999) + ".json";
-        var savePath = path.join(config.dump, filename);
-        var text = JSON.stringify(parsed, null, 2);
-        fs.writeFile(savePath, text, function(err) {
-            if(err) {
-                return console.log(err);
-            }
-        });
-    }
-    //trim list of emails if necessary
-    while(mails.length > config.maxEmails) {
-        mails.splice(1,1);
-    }
+  mails.push(parsed);
+  // Log to console if enabled
+  if (!config.quite) {
+    console.log(parsed.headers);
+    console.log(parsed.html || parsed.text);
+    console.log();
+  }
+  // Write to file if enabled
+  if (config.dump) {
+    var filename = new Date().getTime() +
+      "-" + randomInt(10000, 99999) + ".json";
+    var savePath = path.join(config.dump, filename);
+    var text = JSON.stringify(parsed, null, 2);
+    fs.writeFile(savePath, text, function (err) {
+      if (err) {
+        return console.log(err);
+      }
+    });
+  }
+  //trim list of emails if necessary
+  while (mails.length > config.maxEmails) {
+    mails.splice(1, 1);
+  }
 }
 
 /**
@@ -45,48 +45,48 @@ function process(parsed) {
  * @returns {*|MailParser} MailParser instance
  */
 function getMailparser() {
-    var mailParser = new MailParser();
-    mailParser.on("end", process);
-    return mailParser;
+  var mailParser = new MailParser();
+  mailParser.on("end", process);
+  return mailParser;
 }
 
 function start() {
-    smtp.createServer(function (req) {
+  smtp.createServer(function (req) {
 
-        if (config.whitelist) {
-            req.on("from", function (from, ack) {
-                if (config.whitelist.length == 0 || config.whitelist.indexOf(from) !== -1)
-                    ack.accept();
-                else ack.reject()
-            });
-        }
+    if (config.whitelist) {
+      req.on("from", function (from, ack) {
+        if (config.whitelist.length == 0 || config.whitelist.indexOf(from) !== -1)
+          ack.accept();
+        else ack.reject()
+      });
+    }
 
-        req.on("message", function (stream, ack) {
-            // New MailParser instance for each mail
-            var mailParser = getMailparser();
-            // Receive data
-            stream.on("data",function(d) {
-                mailParser.write(d);
-            });
-            // All data received
-            stream.on("end", function() {
-                mailParser.end("");
-            });
+    req.on("message", function (stream, ack) {
+      // New MailParser instance for each mail
+      var mailParser = getMailparser();
+      // Receive data
+      stream.on("data", function (d) {
+        mailParser.write(d);
+      });
+      // All data received
+      stream.on("end", function () {
+        mailParser.end("");
+      });
 
-            ack.accept();
-        });
+      ack.accept();
+    });
 
-    }).listen(config.smtpPort);
+  }).listen(config.smtpPort);
 }
 
 module.exports = {
-	start: function() {
-        start()
-    },
-    getMails: function() {
-        return mails;
-    },
-    setConfig: function(configArg) {
-        config = configArg;
-    }
+  start: function () {
+    start()
+  },
+  getMails: function () {
+    return mails;
+  },
+  setConfig: function (configArg) {
+    config = configArg;
+  }
 };
