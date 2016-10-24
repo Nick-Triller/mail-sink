@@ -14,7 +14,9 @@ function getMailparser() {
         mails.push(parsed);
 
         if (!config.quite) {
-            console.log(parsed.html + "\n");
+            console.log(parsed.headers);
+            console.log(parsed.html);
+            console.log();
         }
 
          //trim list of emails if necessary
