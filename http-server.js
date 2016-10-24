@@ -4,7 +4,7 @@ var pug = require("pug");
 var mails = [];
 var config;
 
-app.set("views", "./views");
+app.set("views", __dirname + "/views");
 app.set("view engine", "pug");
 
 app.get('/', function (req, res) {
