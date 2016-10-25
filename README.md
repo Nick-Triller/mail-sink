@@ -12,6 +12,7 @@ npm install -g mail-sink
 - Parsing and rendering mails on a website
 - Dumping mails to file
 - CSS encapsulation
+- Access mails and metadata programmatically through a json api
 
 ## Usage
 ```
