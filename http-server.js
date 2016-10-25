@@ -18,10 +18,19 @@ app.get("/emails", function (req, res) {
 });
 
 app.get("/emails/:index(\\d+)", function (req, res, next) {
-  res.type("html");
+
   var index = +req.params["index"];
   if (index < 0 || index >= mails.length) {
     return next();
+  }
+  if (mails[index].html === undefined || mails[index].html === null) {
+    // plain text mail
+    res.type("text");
+    // disable mime type sniffing
+    res.set('X-Content-Type-Options', 'nosniff');
+  } else {
+    // html mail
+    res.type("html");
   }
   res.send(mails[index].html || mails[index].text);
 });
