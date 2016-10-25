@@ -11,6 +11,7 @@ html
         a(href='/emails') Emails as json
         hr
         each mail, index in mails
+            pre #{JSON.stringify(mail.headers, null, 2)}
             iframe(src="/emails/" + index, style="border: 0; padding: 0; margin: 0; width: 100%;",
                 onload="resizeIframe(this)")
             hr
