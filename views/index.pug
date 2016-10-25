@@ -1,17 +1,18 @@
 doctype html
 html
-    head
-        meta(charset='utf-8')
-        script.
-            function resizeIframe(obj) {
-                obj.style.height = obj.contentWindow.document.body.scrollHeight + "px";
-            }
+  head
+    meta(charset="utf-8")
+    script.
+      function resizeIframe(obj) {
+        obj.style.height = obj.contentWindow.document.body.scrollHeight + "px";
+      }
     body
-        h1 Mail Sink
-        a(href='/emails') Emails as json
+      h1 Mail Sink
+      a(href="/emails") Emails as json
+      form(action="/emails/clear", method="POST", style="float: right")
+        input(type="submit", value="Clear emails")
+      hr
+      each mail, index in mails
+        pre #{JSON.stringify(mail.headers, null, 2)}
+        iframe(src="/emails/" + index, style="border: 0; padding: 0; margin: 0; width: 100%;", onload="resizeIframe(this)")
         hr
-        each mail, index in mails
-            pre #{JSON.stringify(mail.headers, null, 2)}
-            iframe(src="/emails/" + index, style="border: 0; padding: 0; margin: 0; width: 100%;",
-                onload="resizeIframe(this)")
-            hr

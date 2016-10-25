@@ -7,7 +7,7 @@ var config;
 app.set("views", __dirname + "/views");
 app.set("view engine", "pug");
 
-app.get('/', function (req, res) {
+app.get("/", function (req, res) {
   res.type("html");
   res.render('index', { mails: mails });
 });
@@ -15,6 +15,12 @@ app.get('/', function (req, res) {
 app.get("/emails", function (req, res) {
   res.type("json");
   res.send(JSON.stringify(mails, null, 2));
+});
+
+// clear mails
+app.post("/emails/clear", function (req, res) {
+  mails = [];
+  res.redirect("/");
 });
 
 app.get("/emails/:index(\\d+)", function (req, res, next) {
