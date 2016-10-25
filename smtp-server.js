@@ -17,7 +17,7 @@ function randomInt(low, high) {
 function process(parsed) {
   mails.push(parsed);
   // Log to console if enabled
-  if (!config.quite) {
+  if (!config.quiet) {
     console.log(parsed.headers);
     console.log(parsed.html || parsed.text);
     console.log();

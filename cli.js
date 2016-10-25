@@ -28,7 +28,7 @@ var config = {
   dumpFiles: program.dumpFiles || true,
   dump: program.dump || null,
   whitelist: program.whitelist || [],
-  quite: program.quiet || false,
+  quiet: program.quiet || false,
   maxEmails: program.max || 200,
   version: getVersion()
 };
