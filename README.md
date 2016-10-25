@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Nick-Triller/mail-sink.svg?branch=master)](https://travis-ci.org/Nick-Triller/mail-sink)
+
 # Mail Sink
 
 A smtp debugging email sink, inspired by [smtp-sink](https://github.com/jimmystridh/node-smtp-sink).
