@@ -23,7 +23,7 @@ app.get("/emails/:index(\\d+)", function (req, res, next) {
   if (index < 0 || index >= mails.length) {
     return next();
   }
-  res.send(mails[index].html);
+  res.send(mails[index].html || mails[index].text);
 });
 
 app.all("*", function (req, res) {
