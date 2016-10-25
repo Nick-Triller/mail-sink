@@ -33,7 +33,7 @@ npm install -g mail-sink
 The filenames are constructed as follows: `timestamp-randomInt.json`, e.g. `1477324594663-60741.json`.
 
 ## Docker
-mail-sink is avaiable on [Docker Hub](https://hub.docker.com/r/nicktriller/mail-sink/)
+mail-sink is avaiable on [Docker Hub](https://hub.docker.com/r/nicktriller/mail-sink/).
 The exposed ports are the default ports (8080 for http and 1025 for smtp).
 `/usr/mails` is a volume (see Dockerfile).
 
