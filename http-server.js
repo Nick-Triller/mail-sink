@@ -14,7 +14,7 @@ app.get('/', function (req, res) {
 
 app.get("/emails", function (req, res) {
   res.type("json");
-  res.send(JSON.stringify(mails));
+  res.send(JSON.stringify(mails, null, 2));
 });
 
 app.get("/emails/:index(\\d+)", function (req, res, next) {
