@@ -19,7 +19,7 @@ app.get("/emails", function (req, res) {
 
 // clear mails
 app.post("/emails/clear", function (req, res) {
-  mails = [];
+  mails.length = 0;
   res.redirect("/");
 });
 
