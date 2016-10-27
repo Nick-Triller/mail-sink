@@ -1,6 +1,6 @@
 {
   "name": "mail-sink",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "SMTP server for testing.",
   "main": "index.js",
   "scripts": {
